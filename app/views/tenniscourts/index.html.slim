@@ -1,2 +1,82 @@
-h1 Tenniscourts#index
-p Find me in app/views/tenniscourts/index.html.slim
+
+
+
+.col-xs-10.col-xs-offset-1.row
+	h4 テニスコート検索
+	button#getCurrentPosition.btn.btn-default 現在地を取得する
+	hr
+	#map.col-xs-7 style="height: 600px;"
+
+	.col-xs-5
+		table.place_info.table.table-striped
+			- 1.upto(7) do |i|
+				tr
+					td
+						span[id="name-#{i}"]
+						br
+						span[id="address-#{i}"]
+						br
+						span.btn.btn-info.btn-sm
+							| 経路を表示する
+						span.btn.btn-success.btn-sm
+							| コミュニティを作る
+
+
+
+
+
+
+
+
+
+
+
+= javascript_include_tag 'map.js'
+
+javascript:
+	let map;
+	function initialize() {
+		var initPos = new google.maps.LatLng(35.729756, 139.711069);
+		var myOptions = { zoom: 15, center: initPos };
+
+		map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+		var request = {
+			location: initPos,
+			radius: 1000,
+			query: 'テニスコート'
+		};
+
+		service = new google.maps.places.PlacesService(map);
+		service.textSearch(request, Result_Places);
+
+	}
+
+	function Result_Places(results, status){
+		if(status==google.maps.places.PlacesServiceStatus.OK){
+			for(var i=0; i<results.length; i++){
+				var place = results[i];
+				$('#name-' + i).html(place.name);
+				var address = (place.formatted_address).split('、')[1];
+				$('#address-' + i).html(address);
+				createMarker({
+					text: place.name,
+					position: place.geometry.location
+				});
+			}
+		}
+	}
+
+	function createMarker(options) {
+		options.map = map;
+		var marker = new google.maps.Marker(options);
+		var infoWnd = new google.maps.InfoWindow();
+		infoWnd.setContent(options.text);
+		google.maps.event.addListener(marker, 'click', function(){
+			infoWnd.open(map, marker);
+		});
+		return marker;
+	}
+
+
+script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['API_KEY']}&libraries=places&callback=initialize"
