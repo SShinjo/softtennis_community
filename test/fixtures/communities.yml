@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  introduction: MyText
+  date: 2020-01-11
+  time: 2020-01-11 05:40:12
+  place: MyString
+  capacity: 1
+  is_closed: false
+  is_held: false
+
+two:
+  name: MyString
+  introduction: MyText
+  date: 2020-01-11
+  time: 2020-01-11 05:40:12
+  place: MyString
+  capacity: 1
+  is_closed: false
+  is_held: false

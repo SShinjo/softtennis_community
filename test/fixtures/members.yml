@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: 
+  community: 
+  is_host: false
+  is_member: false
+  is_checked: false
+
+two:
+  user: 
+  community: 
+  is_host: false
+  is_member: false
+  is_checked: false
