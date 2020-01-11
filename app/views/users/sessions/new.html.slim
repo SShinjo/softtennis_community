@@ -1,18 +1,21 @@
-h2
-  | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    br
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
+
+.col-xs-6.col-xs-offset-3
+
+  h2
+    | ログイン
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+
+
     .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "users/shared/links"
+      = f.label :email
+      br
+      = f.email_field :email, placeholder: "tennis@soft.com", class: "col-xs-12"
+
+    .field
+      = f.label :password
+      br
+      = f.password_field :password, placeholder: "6文字以上で入力してください", class: "col-xs-12"
+
+
+    = f.submit "ログイン", class: "btn btn-success col-xs-6 col-xs-offset-3"
+  /= render "users/shared/links"
