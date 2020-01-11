@@ -70,6 +70,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 gem 'refile-mini_magick'
@@ -80,7 +82,7 @@ gem 'bootstrap-sass', '>= 3.4.1'
 gem 'pry'
 gem 'pry-rails'
 
-gem 'slim'
+gem 'slim-rails'
 gem 'html2slim'
 
 gem 'dotenv-rails'
