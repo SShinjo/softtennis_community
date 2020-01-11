@@ -1,16 +1,44 @@
 Rails.application.routes.draw do
-  get 'searchs/search'
-  get 'tenniscourts/index'
-  get 'tenniscourts/show'
-  get 'chats/show'
-  get 'communities/new'
-  get 'communities/index'
-  get 'communities/edit'
-  get 'relationships/index'
-  get 'users/edit'
-  get 'users/activity'
-  get 'users/show'
-  get 'members/edit'
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords'
+  }
+
+# トップページ
+  root to: 'toppages#top'
+
+# ユーザー
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      patch :leave # 退会機能
+      get :activity # 活動履歴表示ページ
+      get :friend # フレンド一覧ページ
+    end
+  end
+
+# フレンド機能
+  resources :relationships, only: [:create, :destroy]
+
+# コミュニティメンバー
+  resources :members, only: [:create, :edit, :update, :destroy]
+
+# コミュニティ
+  resources :communities do
+    member do
+      patch :closed #募集締め切りに切り替える
+      patch :held #開催済に切り替える
+    end
+  end
+
+# チャットルーム
+  resources :chats, only: [:show]
+
+# テニスコート
+  resources :tenniscourts, only: [:index, :show]
+
+# 検索機能
+  resources :searchs, only: [:search]
+
 end
