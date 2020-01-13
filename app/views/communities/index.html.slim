@@ -1,2 +1,22 @@
-h1 Communities#index
-p Find me in app/views/communities/index.html.slim
+
+.col-xs-8.col-xs-offset-2
+	h2 コミュニティページ
+	h5 気になったコミュニティに参加することができます。
+
+
+	- @coms.each do |com|
+		.box
+			span.glyphicon.glyphicon-apple
+				| #{com.name}
+			span
+				| by #{com.users.find_by(id: com.members.host.pluck(:user_id)).name}
+
+			p #{com.introduction}
+			span.glyphicon.glyphicon-user
+				| あと#{com.capacity - com.members.count + 1}人参加できます
+			br
+			= form_for(@member) do |f|
+				= f.hidden_field :community_id, value: com.id
+				= f.submit '参加する', class: "btn btn-success"
+			span.btn.btn-danger
+				| キャンセル

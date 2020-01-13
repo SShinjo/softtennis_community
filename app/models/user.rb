@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :members
+  has_many :communities, through: :members
+
 # ポジション情報
   enum position: {前衛:1, 後衛:2, どちらでも:3, わからない:4}
 # 技術レベル
