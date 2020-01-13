@@ -2,6 +2,6 @@ class TenniscourtsController < ApplicationController
   def index
   end
 
-  def show
+  def route
   end
 end

@@ -36,7 +36,11 @@ Rails.application.routes.draw do
   resources :chats, only: [:show]
 
 # テニスコート
-  resources :tenniscourts, only: [:index, :show]
+  resources :tenniscourts, only: [:index] do
+    collection do
+      get :route
+    end
+  end
 
 # 検索機能
   resources :searchs, only: [:search]
