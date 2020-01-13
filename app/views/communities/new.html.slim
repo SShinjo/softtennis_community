@@ -1,2 +1,42 @@
-h1 Communities#new
-p Find me in app/views/communities/new.html.slim
+
+.col-xs-6.col-xs-offset-3
+	h2 コミュニティ作成
+
+	= form_for(@com) do |f|
+		= f.fields_for :members do |member|
+			= member.hidden_field :user_id, value: current_user.id
+			= member.hidden_field :is_host, value: true
+			= member.hidden_field :is_member, value: true
+
+		.form-group
+			label.control-label コミュニティ名
+			= f.text_field :name, class: 'form-control', placeholder: 'コミュニティ名'
+
+			label.control-label 紹介文
+			= f.text_area :introduction, class: 'form-control', placeholder: 'コミュニティの紹介文', rows: '5'
+
+		.form-group
+			label.control-label 開催日時
+			- datetime_select = f.date_select :date, 
+			                    { use_month_numbers: true,
+			                      date_separator: '%s' }
+			=raw sprintf(datetime_select, '年', '月') + '日'
+
+			span ---
+
+			=f.time_select :time
+
+		span 開催場所
+		br
+		span フレンドから選ぶ
+		br
+
+		.form_group
+			label.control-label 定員
+			= f.number_field :capacity, step: 1..50
+
+		br
+
+		= f.submit '作成する'
+
+
