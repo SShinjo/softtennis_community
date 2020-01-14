@@ -1,4 +1,5 @@
 # config valid for current version and patch releases of Capistrano
+
 lock "3.4.0"
 
 set :application, "softtennis_community"
