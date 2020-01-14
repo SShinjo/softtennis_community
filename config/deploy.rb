@@ -1,5 +1,6 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.2"
+
+lock "3.4.0"
 
 set :application, "softtennis_community"
 set :repo_url, "git@github.com:SShinjo/softtennis_community.git"
@@ -47,6 +48,7 @@ namespace :deploy do
 	task :restart do
 		invoke 'unicorn:restart'
 	end
+
 	desc 'Create database'
 	task :db_create do
 		on roles(:db) do |host|
@@ -56,6 +58,8 @@ namespace :deploy do
 				end
 			end
 		end
+	end
+
 	desc 'Run seed'
 	task :seed do
 		on roles(:app) do
