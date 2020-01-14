@@ -1,0 +1,10 @@
+.col-xs-6.col-xs-offset-3
+	h2 参加するメンバーを選ぶ
+	
+	= form_for(@com, url: closed_community_path(@com)) do |f|
+		= collection_check_boxes(:community, :member_ids, @members, :id, :name) do |member|
+			= member.label do
+				= member.check_box
+				= member.object.name
+		br
+		= f.submit
