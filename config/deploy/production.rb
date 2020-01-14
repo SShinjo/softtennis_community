@@ -41,7 +41,7 @@
 #
 # Global options
 # --------------
-  set :ssh_options, keys: '~/.ssh/t_key_rsa'
+  set :ssh_options, keys: '~/.ssh/test.pem'
 #    forward_agent: false,
 #    auth_methods: %w(password)
 
