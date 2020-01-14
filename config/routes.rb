@@ -22,13 +22,14 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
 # コミュニティメンバー
-  resources :members, only: [:create, :edit, :update, :destroy]
+  resources :members, only: [:create, :destroy]
 
 # コミュニティ
   resources :communities do
     member do
       patch :closed #募集締め切りに切り替える
       patch :held #開催済に切り替える
+      get :members #メンバーの選出
     end
   end
 

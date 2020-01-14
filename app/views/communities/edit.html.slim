@@ -1,2 +1,35 @@
-h1 Communities#edit
-p Find me in app/views/communities/edit.html.slim
+.col-xs-6.col-xs-offset-3
+	h2 コミュニティ編集
+
+	= form_for(@com) do |f|
+
+		.form-group
+			label.control-label コミュニティ名
+			= f.text_field :name, class: 'form-control'
+
+			label.control-label 紹介文
+			= f.text_area :introduction, class: 'form-control', rows: '5'
+
+		.form-group
+			label.control-label 開催日時
+			- datetime_select = f.date_select :date, 
+			                    { use_month_numbers: true,
+			                      date_separator: '%s' }
+			=raw sprintf(datetime_select, '年', '月') + '日'
+
+			span ---
+
+			=f.time_select :time
+
+		span 開催場所
+		br
+		span フレンドから選ぶ
+		br
+
+		.form_group
+			label.control-label 定員
+			= f.number_field :capacity, step: 1..50
+
+		br
+
+		= f.submit '作成する'
